@@ -7,51 +7,62 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- MBTI 입력 섹션 -->
-    <div id="intro-section" class="container">
-        <h1>포켓몬 성격 테스트</h1>
-        <p>나와 가장 잘 맞는 포켓몬은 누구일까?</p>
-        
-        <div class="mbti-selectors">
-            <select id="mbti-e-i">
-                <option value="E">E (외향형)</option>
-                <option value="I">I (내향형)</option>
-            </select>
-            <select id="mbti-s-n">
-                <option value="S">S (감각형)</option>
-                <option value="N">N (직관형)</option>
-            </select>
-            <select id="mbti-t-f">
-                <option value="T">T (사고형)</option>
-                <option value="F">F (감정형)</option>
-            </select>
-            <select id="mbti-j-p">
-                <option value="J">J (판단형)</option>
-                <option value="P">P (인식형)</option>
-            </select>
-        </div>
-        <button id="match-btn">내 포켓몬 확인하기</button>
-    </div>
+    <div class="app-container">
+        <!-- 메인 헤더 -->
+        <header>
+            <h1>POKÉMON x MBTI</h1>
+            <p>나의 영혼을 닮은 포켓몬 카드는?</p>
+        </header>
 
-    <!-- 결과 카드 섹션 -->
-    <div id="result-section" class="container hidden">
-        <h2>당신의 영혼의 파트너는...</h2>
-        
-        <div class="card-container">
-            <div class="card" id="pokemon-card">
-                <div class="card-glare"></div>
-                <div class="card-content">
-                    <h3 id="result-mbti">MBTI</h3>
-                    <h2 id="result-name">포켓몬 이름</h2>
-                    <img id="result-img" src="" alt="포켓몬 이미지">
-                    <div class="stats">
-                        <p id="result-desc">포켓몬 설명이 들어갑니다.</p>
-                    </div>
+        <!-- MBTI 입력 섹션 -->
+        <div id="intro-section" class="glass-panel">
+            <div class="mbti-selection-board">
+                <!-- E / I -->
+                <div class="mbti-row">
+                    <button class="mbti-btn active" data-group="ei" data-val="E"><strong>E</strong> 외향형</button>
+                    <button class="mbti-btn" data-group="ei" data-val="I"><strong>I</strong> 내향형</button>
+                </div>
+                <!-- S / N -->
+                <div class="mbti-row">
+                    <button class="mbti-btn active" data-group="sn" data-val="S"><strong>S</strong> 감각형</button>
+                    <button class="mbti-btn" data-group="sn" data-val="N"><strong>N</strong> 직관형</button>
+                </div>
+                <!-- T / F -->
+                <div class="mbti-row">
+                    <button class="mbti-btn active" data-group="tf" data-val="T"><strong>T</strong> 사고형</button>
+                    <button class="mbti-btn" data-group="tf" data-val="F"><strong>F</strong> 감정형</button>
+                </div>
+                <!-- J / P -->
+                <div class="mbti-row">
+                    <button class="mbti-btn active" data-group="jp" data-val="J"><strong>J</strong> 판단형</button>
+                    <button class="mbti-btn" data-group="jp" data-val="P"><strong>P</strong> 인식형</button>
                 </div>
             </div>
+            
+            <button id="match-btn" class="primary-btn">내 카드 뽑기</button>
         </div>
 
-        <button id="reset-btn" class="outline-btn">다른 MBTI 테스트하기</button>
+        <!-- 결과 카드 섹션 -->
+        <div id="result-section" class="glass-panel hidden">
+            <div class="result-header">
+                <span class="mbti-badge" id="result-mbti">MBTI</span>
+                <h2 id="result-name">포켓몬 이름</h2>
+            </div>
+            
+            <!-- 실제 TCG 카드 3D 렌더링 영역 -->
+            <div class="card-container">
+                <div class="tcg-card" id="pokemon-card">
+                    <img id="result-img" src="" alt="포켓몬 카드">
+                    <div class="card-glare"></div>
+                </div>
+            </div>
+
+            <div class="result-info">
+                <p id="result-desc">포켓몬 설명이 들어갑니다.</p>
+            </div>
+
+            <button id="reset-btn" class="secondary-btn">다시 뽑기</button>
+        </div>
     </div>
 
     <script src="script.js"></script>

@@ -1,149 +1,139 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: #0E1117;
+    /* 세련된 다크 인디고 그래디언트 배경 */
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
     color: #ffffff;
     font-family: 'Noto Sans KR', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
     overflow-x: hidden;
-}
-
-.container {
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
     padding: 20px;
 }
 
-.hidden {
-    display: none !important;
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
 }
 
-h1 { color: #facc15; margin-bottom: 5px; }
-h2 { color: #facc15; font-size: 24px; }
-p { color: #9ca3af; margin-bottom: 30px; }
+header { margin-bottom: 30px; }
+header h1 { font-size: 32px; font-weight: 900; letter-spacing: 2px; color: #4deeea; text-shadow: 0 0 10px rgba(77, 238, 234, 0.5); }
+header p { color: #a1a1aa; margin-top: 8px; font-size: 15px; }
 
-.mbti-selectors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 30px;
+/* 글래스모피즘(유리 질감) 패널 */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.mbti-selectors select {
-    padding: 12px;
+.hidden { display: none !important; opacity: 0; transform: translateY(20px); }
+
+/* --- 버튼 선택 UI --- */
+.mbti-selection-board { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+.mbti-row { display: flex; gap: 10px; }
+
+.mbti-btn {
+    flex: 1;
+    padding: 16px;
     font-size: 16px;
-    background-color: #1f2937;
-    color: white;
-    border: 1px solid #374151;
-    border-radius: 8px;
-    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: #a1a1aa;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     cursor: pointer;
-    width: calc(50% - 5px);
+    transition: all 0.2s ease;
 }
 
-button {
-    padding: 15px 30px;
+.mbti-btn strong { font-size: 18px; margin-right: 5px; }
+.mbti-btn:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* 선택된 버튼 스타일 */
+.mbti-btn.active {
+    background: linear-gradient(135deg, #7b2cbf, #4deeea);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(123, 44, 191, 0.4);
+    font-weight: 700;
+}
+
+/* 액션 버튼 */
+.primary-btn {
+    width: 100%;
+    padding: 18px;
     font-size: 18px;
     font-weight: bold;
-    color: #0E1117;
-    background: linear-gradient(135deg, #facc15, #ff9800);
+    color: #000;
+    background: #4deeea;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(77, 238, 234, 0.3);
+}
+
+.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(77, 238, 234, 0.5); }
+.secondary-btn { width: 100%; padding: 15px; margin-top: 25px; background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; cursor: pointer; transition: 0.2s; }
+.secondary-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* --- 결과 화면 및 TCG 카드 3D --- */
+.result-header { margin-bottom: 20px; }
+.mbti-badge { display: inline-block; background: #7b2cbf; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; }
+#result-name { font-size: 28px; }
+
+.card-container { perspective: 1000px; display: flex; justify-content: center; margin: 20px 0; }
+
+.tcg-card {
     width: 100%;
-    max-width: 300px;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(250, 204, 21, 0.4);
-}
-
-.outline-btn {
-    margin-top: 40px;
-    background: transparent;
-    border: 2px solid #4b5563;
-    color: #d1d5db;
-}
-
-.outline-btn:hover {
-    background: #1f2937;
-    box-shadow: none;
-}
-
-/* 3D 카드 애니메이션 UI */
-.card-container {
-    perspective: 1000px;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.card {
-    width: 300px;
-    height: 440px;
-    background: linear-gradient(145deg, #2a2a35, #111116);
-    border: 2px solid #4b5563;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    max-width: 280px;
+    aspect-ratio: 2.5 / 3.5; /* 실제 TCG 카드 비율 */
+    border-radius: 15px; /* TCG 카드의 둥근 모서리 */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(77, 238, 234, 0.2);
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.1s ease-out;
     cursor: pointer;
 }
 
-.card-content {
-    padding: 25px;
-    transform: translateZ(60px); /* 텍스트와 이미지를 3D로 띄움 */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-}
-
-.card-content h3 { margin: 0; color: #9ca3af; font-size: 20px; letter-spacing: 2px; }
-.card-content h2 { margin: 10px 0 20px; font-size: 32px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.card-content img { 
-    width: 200px; 
-    height: 200px; 
-    object-fit: contain;
-    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6)); 
-    margin-bottom: 20px;
-}
-
-.stats { 
-    font-size: 15px; 
-    color: #e5e7eb; 
-    background: rgba(0,0,0,0.4); 
-    padding: 15px; 
-    border-radius: 12px;
+.tcg-card img {
     width: 100%;
-    line-height: 1.5;
-    border: 1px solid rgba(255,255,255,0.1);
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
-/* 카드 반사광 효과 */
+/* 카드 반사광 (홀로그램 느낌) */
 .card-glare {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    border-radius: 20px;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0) 60%);
+    border-radius: 15px;
+    background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.3) 25%, transparent 28%);
+    background-size: 200% 200%;
+    background-position: 100% 100%;
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
     z-index: 2;
+    mix-blend-mode: overlay;
 }
 
-.card:hover .card-glare { opacity: 1; }
+.tcg-card:hover .card-glare { opacity: 1; }
+
+.result-info {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #e4e4e7;
+    line-height: 1.6;
+}
